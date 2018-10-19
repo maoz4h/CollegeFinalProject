@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sign up To Playlist Factory!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    </head>
+    <body>
+
+        <div data-role="page" data-theme="b">
+            <div data-role="header">
+                <h1>Welcome To Playlist Factory!</h1>
+            </div><!-- /header -->
+
+            <div data-role="content">	
+                <h3>Sign Up</h3>		
+            </div><!-- /content -->
+
+            <div id="SignInForm" class="ui-grid-d center" style="text-align: center">
+                <form method="post" action="ServletSignIn" enctype="multipart/form-data">
+
+                    <!-- Signing in -->
+
+                    <input type="email" name="i_Email" class="form-control"
+                           id="exampleInputEmail3" placeholder="E-mail"> <input type="text" name="i_Name" class="form-control"
+                           id="exampleInputEmail3" placeholder="Name"> <input
+                           type="password" name="i_Password" class="form-control"
+                           id="exampleInputPassword3"
+                           placeholder="Password"> <input
+                           type="Password" name="i_ConfirmPassword" class="form-control"
+                           id="exampleInputPassword4"
+                           placeholder="ConfirmPassword"> <br>
+
+                    <!-- Submit -->
+
+                    <button type="submit" class="btn center-block" data-icon="check" value="Sign up">Sign
+                        up</button>
+                    <br>
+                </form>
+            </div>
+           
+            
+            <div class="text-xs-center"  align="middle" >
+            <img src="imageedit_7_8965588435.png"  class="img-circle" alt="Cinque Terre" style="width:150px;height:150px" align="middle"/>
+            </div>
+            <hr>
+            
+            <div id="Links" class="ui-grid-d center" style="text-align: center">
+                <a href="SignIn.html" data-role="button" data-icon="plus">Sign In</a>
+                <a href="index.html" data-role="button" data-icon="home">Home Page</a>
+            </div>
+            
+        </div><!-- /page -->
+
+    </body>
+
+</html>       
+        
+        
+        
+        
+        
+        
+     

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Welcome To Playlist Factory!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        <script src="index.js"></script>
+        <meta name="google-signin-client_id" content="362164061674-alf7qdgd8kjgtejahaqbb3l1dirp32v0.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+        <script>
+            function onSuccess(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                gapi.client.load('plus', 'v1', function () {
+                    var request = gapi.client.plus.people.get({
+                        'userId': 'me'
+                    });
+                    //Display the user details
+                    request.execute(function (resp) {
+                        var profileHTML = '<div class="profile"><div class="head">Welcome ' + resp.name.givenName + '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a></div>';
+                        profileHTML += '<img src="' + resp.image.url + '"/><div class="proDetails"><p>' + resp.displayName + '</p><p>' + resp.emails[0].value + '</p><p>' + resp.gender + '</p><p><a href="' + resp.url + '">View Google+ Profile</a></p></div> <a href="UserPage.html" data-role="button" data-icon="star"> Go To UserPage</a> </a></div>';
+
+                        $('.userContent').html(profileHTML).position("center");
+                        $('#gSignIn').slideUp('slow').position("right");
+                    });
+                });
+            }
+            function onFailure(error) {
+                alert(error);
+            }
+            function renderButton() {
+                gapi.signin2.render('gSignIn', {
+                    'scope': 'profile email',
+                    'width': 240,
+                    'height': 50,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccess,
+                    'onfailure': onFailure
+                });
+            }
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    $('.userContent').html('');
+                    $('#gSignIn').slideDown('slow');
+                });
+            }
+        </script>
+    </head>
+    <body>
+
+        <div data-role="page" style="background-image: url('http://discofactory.fm/app/uploads/2015/09/Dust_and_Grooves_34831-1024x6832.jpg'); background-attachment: fixed; background-repeat: no-repeat; background-size: 100% 100%;" data-theme="b">
+            <div data-role="header">
+                <h1>Welcome To Playlist Factory!</h1>
+            </div><!-- /header -->
+
+            <div data-role="content" style="text-align: center; color: buttonface">	
+                <h3>Home Page</h3>		
+                <p>Hello, Welcome to The Playlist Factory! Sign up and start building your playlist, our algorithim will make sure your playlist flows soomthly. All you have to do is let us do the work!</p>
+            </div><!-- /content -->
+
+            <hr>
+
+            <div id="Links" class="ui-grid-d center" style="text-align: center">
+                <a href="SignIn.html" data-role="button" data-icon="star">Sign In</a>
+                <a href="SignUp.html" data-role="button" data-icon="plus" >Sign Up</a>
+            </div>
+            <!-- HTML for render Google Sign-In button -->
+            <object align='center'>
+                <div id="gSignIn" align='center'></div>
+            </object>
+            <!-- HTML for displaying user details -->
+            <div class="userContent" align='center'></div>
+            <div align='center'>
+                <style align='center'>
+                    .profile{
+                        border: 3px solid #B7B7B7;
+                        padding: 10px;
+                        margin-top: 10px;
+                        width: 350px;
+                        background-color: #F7F7F7;
+                        height: 160px;
+                        alignment-adjust: central;
+                        alignment-baseline: central;
+                        align-items: center;
+                        left: 3000px;
+                    }
+                    .profile p{margin: 0px 0px 10px 0px;}
+                    .head{margin-bottom: 10px;}
+                    .head a{float: right;}
+                    .profile img{width: 100px;float: left;margin: 0px 10px 10px 0px;}
+                    .proDetails{float: left;}
+                </style>
+                
+                        <div class="text-xs-center"  align="middle" >
+            <img src="imageedit_7_8965588435.png"  class="img-circle" alt="Cinque Terre" style="width:150px;height:150px" align="middle"/>
+            </div>
+            </div>
+        </div>
+
+    </body>
+
+
+</html>

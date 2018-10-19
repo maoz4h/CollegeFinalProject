@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+   
+    <head>
+        <title>Your Playlist Factory User Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>      
+    </head>
+    <body>
+        <!--                <div data-role="page" style="background-image: url('userpagebackround.png'); background-attachment: fixed; background-repeat: no-repeat; background-size: 100% 100%;" data-theme="b">   -->
+
+        <!--<div data-role="page" id="page" style="background-image: url('#URL'); background-attachment: fixed; background-repeat: no-repeat; background-size: 100% 100%;"
+            data-theme="a">-->
+        <div data-role="page" data-theme="b">
+
+            <div data-role="header">
+                <h1>Your Playlist Factory User Page</h1>
+            </div><!-- /header -->
+
+
+            <div class="ui-grid-b center" style="text-align: center">
+
+                 <h4 >Build a New Playlist</h4>
+                              
+                <a href="#popupBuildPlaylistScanPlaylist" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop" title="Scan one of your playlist and sort it by choosing a representative song">Scan Playlist</a>
+                <a href="#popupBuildPlaylistScanFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-b" data-transition="pop" title="Scan your music folder and create a new playlist by choosing a representative song">Scan Folder</a>
+                <a href="#popupBuildYouTubePlaylist" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop" title="Build a new YouTube Playlist based our data base">New YouTube Playlist</a>
+                <a href="#popupScanYouTubePlaylist" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-b" data-transition="pop" title="Scan a YouTube playlist and sort it by choosing a representative song">Scan YouTube Playlist</a>
+
+            </div>
+
+            <!--  Scan Playlist  -->
+            <div data-role="popup" id="popupBuildPlaylistScanPlaylist" data-theme="b" class="ui-corner-all">
+                    
+                <form method="post" action="ServletScanPlaylist" enctype="multipart/form-data" data-ajax="false">
+                    <div style="padding:10px 20px;">
+                        <label>Create a Playlist file from an existing Playlist file.</label>  
+                        <hr>
+                        <br>
+                        <!-- Import a playlist -->
+                        <label>Upload a playlist file: </label>
+                        <input type="file" accept=".m3u" name="i_File">
+                        <hr>
+                        <!-- Choose a representative file for the new playlist -->
+                        <fieldset class="ui-grid-a">
+                            <label>Representative Song details:</label>
+                            <br>
+                            <div class="ui-block-a">
+                                <label>Title:</label>
+                                <input type="text" name="i_SongRepTitle">
+                            </div>
+                            <div class="ui-block-b">
+                                <label>Artist:</label>
+                                <input type="text" name="i_SongRepArtist">
+                            </div>
+                        </fieldset>
+                        <!-- Build playlist -->
+                        <hr>
+                        <button type="submit" class="btn center-block" value="Build Playlist">Build Playlist</button>
+                        <br>
+
+                    </div>
+                </form>
+            </div>
+
+            <!--  Scan Folder  -->
+            <div data-role="popup" id="popupBuildPlaylistScanFolder" data-theme="b" class="ui-corner-all">
+                  
+                <form method="post" action="ServletBuildPlaylistScanFolder" enctype="multipart/form-data" data-ajax="false">
+                    <div style="padding:10px 20px;">
+                        <label>Create a Playlist file from a music directory.</label>  
+                        <hr>
+                        <br>
+                        <!-- Import a playlist -->
+                        <label>Enter a music folder path: </label>
+                        <!--
+                        <input multiple type="file" webkitdirectory directory multiple name="i_Folder" id="i_Folder" accept=".mp3"/>
+                        -->
+                        <input type="text" id="FolderPath" name="i_FolderPath">
+                        <hr>
+                        <!-- Choose a representative file for the new playlist -->
+                        <fieldset class="ui-grid-a">
+                            <label>Representative Song details:</label>
+                            <br>
+                            <div class="ui-block-a">
+                                <label>Title:</label>
+                                <input type="text" name="i_SongRepTitle">
+                            </div>
+                            <div class="ui-block-b">
+                                <label>Artist:</label>
+                                <input type="text" name="i_SongRepArtist">
+                            </div>
+                        </fieldset>
+                        <!-- Build playlist -->
+                        <hr>
+                        <button type="submit" class="btn center-block" value="Build Playlist">Build Playlist</button>
+                        <br>
+
+                    </div>
+                </form>
+            </div>
+            <script src="ScanFolder.js"></script>  
+            <!--  Build YouTube Playlist  -->
+            <div data-role="popup" id="popupBuildYouTubePlaylist" data-theme="b" class="ui-corner-all">
+                    
+                <form method="post" action="ServletSetYouTubePlaylistByDB" enctype="multipart/form-data">
+                    <div style="padding:10px 20px;">
+                        <label>Create a YouTube Playlist from our data base.</label>  
+                        <hr>
+                        <br>
+                        <fieldset class="ui-grid-a">
+                            <label>Representative Song details:</label>
+                            <br>
+                            <div class="ui-block-a">
+                                <label>Title:</label>
+                                <input type="text" name="i_SongRepTitle">
+                            </div>
+                            <div class="ui-block-b">
+                                <label>Artist:</label>
+                                <input type="text" name="i_SongRepArtist">
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <label>Enter the limit for songs amount in the playlist (Minimum 10): </label>
+
+                        <input type="number" id="SongsAmountLimit" name="i_SongsAmountLimit" min="10">
+                        <hr>
+                        <button type="submit" class="btn center-block" value="Build Playlist">Build Playlist</button>
+                    </div>
+                </form>
+            </div>
+
+            <!--  Scan YouTube Playlist  -->
+            <div data-role="popup" id="popupScanYouTubePlaylist" data-theme="b" class="ui-corner-all">
+                    
+                <form method="post" action="ServletScanYouTubePlaylist" enctype="multipart/form-data">
+                    <div style="padding:10px 20px;">
+                        <label>Create a YouTube Playlist from an existing YouTube Playlist.</label>  
+                        <hr>
+                        <br>
+                        <fieldset class="ui-grid-a">
+                            <label>Representative Song details:</label>
+                            <br>                                
+                            <div class="ui-block-a">
+                                <label>Title:</label>
+                                <input type="text" name="i_SongRepTitle">
+                            </div>
+                            <div class="ui-block-b">
+                                <label>Artist:</label>
+                                <input type="text" name="i_SongRepArtist">
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <label>YouTube Playlist link:</label>
+                        <input type="text" name="i_YoutubePlaylist"  >
+
+
+                        <hr>   
+                        <label>Enter the limit for songs amount in the playlist (Minimum 10): </label>                    
+                        <input type="number" id="SongsAmountLimit" name="i_SongsAmountLimit" min="10">
+                        <hr>
+                        <button type="submit" class="btn center-block" value="Build Playlist">Build Playlist</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="text-xs-center"  align="middle" >
+            <img src="imageedit_7_8965588435.png"  class="img-circle" alt="Cinque Terre" style="width:150px;height:150px" align="middle"/>
+            </div>
+            
+            <div id="Links" class="ui-btn ui-btn-inline ui-btn-a" style="text-align: center"  align="middle" >
+                <a href="index.html" data-role="button" data-icon="back">Log Out</a>
+                <a href="" id='y-chan' target="_blank" data-role="button" >Youtube Channel</a>
+            </div>
+            
+            <script>
+            $(document).load
+                    ($.get("ServletYoutubeChannel", {}, function (youtubeChanHtml) {
+                       $('#y-chan').attr("href",youtubeChanHtml);
+                    })
+                            );
+
+        </script>
+        
+        </div>
+        
+        <!--                </div>-->
+
+    </body>
+
+</html>
